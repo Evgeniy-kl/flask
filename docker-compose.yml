@@ -5,14 +5,14 @@ services:
     image: postgres:10
     env_file: env/db.env
     ports:
-      - "5555:5432"
+      - "5432:5432"
 
   web:
     build: project
-    command: python main.py 0.0.0.0:5050
+    command: python app.py 0.0.0.0:5050
     ports:
       - "5050:5050"
     volumes:
-      - ./volumes/web:/home/app/
+      - ./project:/home/app/
     depends_on:
       - db
