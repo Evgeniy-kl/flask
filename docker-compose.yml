@@ -1,0 +1,18 @@
+version: "3"
+services:
+
+  db:
+    image: postgres:10
+    env_file: env/db.env
+    ports:
+      - "5432:5432"
+
+  web:
+    build: project
+    command: python app.py 0.0.0.0:5050
+    ports:
+      - "5050:5050"
+    volumes:
+      - ./project:/home/app/
+    depends_on:
+      - db
